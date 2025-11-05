@@ -1,3 +1,4 @@
+// Final final fix version
 // GANTI DENGAN URL & ANON KEY DARI DASHBOARD SUPABASE BARU LO!
 const SUPABASE_URL = 'https://ghcaldtlomlfvzyadwog.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY2FsZHRsb21sZnZ6eWFkd29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzMzk3NjQsImV4cCI6MjA3NzkxNTc2NH0.13gjKwVzDZalo2ug7RuP4k29cpeUjIpJBZLIwD7MOQA';
