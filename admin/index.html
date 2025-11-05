@@ -69,6 +69,8 @@
                     <input type="hidden" id="edit-project-id">
                     <label for="edit-project-title">Judul Proyek:</label>
                     <input type="text" id="edit-project-title" required>
+                    <label for="edit-project-category">Kategori:</label>
+                    <input type="text" id="edit-project-category" required>
                     <p>Gambar Saat Ini:</p>
                     <img id="current-project-image" src="" alt="Gambar Proyek" style="max-width: 100px; margin-bottom: 10px;">
                     <label for="edit-project-image">Ganti Gambar (Opsional):</label>
@@ -84,10 +86,13 @@
             <h2>[MANAGE_PROJECTS]</h2>
             <button id="logout-btn" style="background: #555; float: right;">LOGOUT</button>
             <form id="add-project-form">
-                <input type="text" id="project-title" placeholder="Judul Proyek (misal: PROYEK_01: R1M)" required>
-                <input type="file" id="project-image" required>
-                <button type="submit">TAMBAH_PROYEK</button>
-            </form>
+        <input type="text" id="project-title" placeholder="Judul Proyek..." required>
+        <!-- BARIS BARU DI SINI -->
+        <input type="text" id="project-category" placeholder="Kategori (misal: Yamaha, Honda, Forged)" required>
+        <input type="file" id="project-image" required>
+        <button type="submit">TAMBAH_PROYEK</button>
+        </form>
+            <div id="project-list"></div>   
             <hr style="margin: 20px 0; border-color: #333;">
             <h3>[EXISTING_PROJECTS]</h3>
             <div id="project-list"></div>

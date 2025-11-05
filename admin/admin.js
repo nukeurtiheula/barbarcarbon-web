@@ -60,13 +60,14 @@ const displayProjects = async () => {
 addProjectForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const title = document.getElementById('project-title').value;
+    const category = document.getElementById('project-category').value;
     const imageFile = document.getElementById('project-image').files[0];
     if (!title || !imageFile) return alert("Judul dan gambar tidak boleh kosong!");
     try {
         const fileName = `${Date.now()}-${imageFile.name}`;
         await supabaseClient.storage.from('project-images').upload(fileName, imageFile);
         const { data: urlData } = supabaseClient.storage.from('project-images').getPublicUrl(fileName);
-        const { error } = await supabaseClient.from('projects').insert([{ title: title, image_url: urlData.publicUrl }]);
+        const { error } = await supabaseClient.from('projects').insert([{ title: title, category: category, image_url: imageUrl }]);
         if (error) throw error;
         addProjectForm.reset();
         alert('Proyek berhasil ditambahkan!');
@@ -96,6 +97,7 @@ projectList.addEventListener('click', async (e) => {
         const { data: project } = await supabaseClient.from('projects').select('*').eq('id', id).single();
         document.getElementById('edit-project-id').value = project.id;
         document.getElementById('edit-project-title').value = project.title;
+        document.getElementById('edit-project-category').value = project.category;
         currentProjectImage.src = project.image_url;
         editModal.style.display = 'flex';
     }
@@ -104,6 +106,7 @@ editProjectForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = document.getElementById('edit-project-id').value;
     const title = document.getElementById('edit-project-title').value;
+    const category = document.getElementById('edit-project-category').value;
     const imageFile = document.getElementById('edit-project-image').files[0];
     let imageUrl = currentProjectImage.src;
     try {
@@ -115,7 +118,7 @@ editProjectForm.addEventListener('submit', async (e) => {
             const oldImagePath = currentProjectImage.src.split('/').pop();
             await supabaseClient.storage.from('project-images').remove([oldImagePath]);
         }
-        const { error } = await supabaseClient.from('projects').update({ title: title, image_url: imageUrl }).eq('id', id);
+        const { error } = await supabaseClient.from('projects').update({ title: title, category: category, image_url: imageUrl }).eq('id', id);
         if (error) throw error;
         alert('Proyek berhasil diupdate!');
         editProjectForm.reset();

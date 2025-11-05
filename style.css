@@ -232,6 +232,33 @@ h1:after {
     text-shadow: 0 0 10px #000;
 }
 
+.filter-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.filter-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.filter-btn:hover {
+    border-color: var(--brutal-red);
+    color: var(--text-light);
+}
+.filter-btn.active { /* Style untuk tombol yang aktif */
+    background: var(--brutal-red);
+    border-color: var(--brutal-red);
+    color: #000;
+}
+
 
 /* --- SERVICES SECTION --- */
 .services-section {
