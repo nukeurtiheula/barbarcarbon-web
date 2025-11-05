@@ -1,4 +1,3 @@
-alert("INI ADALAH KODE VERSI TERBARU - v2");
 // Final final fix version
 // GANTI DENGAN URL & ANON KEY DARI DASHBOARD SUPABASE BARU LO!
 const SUPABASE_URL = 'https://ghcaldtlomlfvzyadwog.supabase.co';
