@@ -18,6 +18,39 @@
         .modal-content h2 { margin-top: 0; }
         .modal-actions { margin-top: 20px; display: flex; gap: 10px; }
         .modal-actions #cancel-edit-btn { background: #555; }
+        /* ======================================================= */
+        /* === KODE BARU UNTUK TAMPILAN MOBILE DIMULAI DI SINI === */
+        /* ======================================================= */
+
+        /* Aturan ini akan aktif jika lebar layar 768px atau lebih kecil */
+        @media (max-width: 768px) {
+            
+            /* Bikin kontainer utama jadi full-width */
+            .admin-container {
+                margin: 10px; /* Kasih sedikit jarak dari pinggir */
+                padding: 15px;
+                width: auto; /* Hapus batasan lebar */
+            }
+
+            /* Bikin daftar proyek jadi atas-bawah */
+            #project-list .item {
+                flex-direction: column; /* Susun jadi vertikal */
+                align-items: flex-start; /* Rata kiri semua */
+                gap: 15px; /* Kasih jarak antara judul dan grup tombol */
+            }
+
+            /* Atur grup tombol biar rapi */
+            #project-list .item div {
+                width: 100%; /* Bikin grup tombol jadi full-width */
+                display: flex;
+                gap: 10px;
+            }
+
+            #project-list .item button {
+                flex-grow: 1; /* Bikin kedua tombol (EDIT/HAPUS) lebarnya sama */
+            }
+
+        }
     </style>
 </head>
 <body>
