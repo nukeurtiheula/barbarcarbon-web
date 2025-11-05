@@ -233,7 +233,7 @@ h1:after {
 }
 
 .filter-container {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -253,7 +253,7 @@ h1:after {
     border-color: var(--brutal-red);
     color: var(--text-light);
 }
-.filter-btn.active { /* Style untuk tombol yang aktif */
+.filter-btn.active {
     background: var(--brutal-red);
     border-color: var(--brutal-red);
     color: #000;

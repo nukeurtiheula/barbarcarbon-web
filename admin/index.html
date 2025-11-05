@@ -69,8 +69,14 @@
                     <input type="hidden" id="edit-project-id">
                     <label for="edit-project-title">Judul Proyek:</label>
                     <input type="text" id="edit-project-title" required>
-                    <label for="edit-project-category">Kategori:</label>
-                    <input type="text" id="edit-project-category" required>
+                    <!-- ================== BLOK KATEGORI BARU (EDIT) ================== -->
+                    <label for="edit-project-category-select">Pilih Kategori:</label>
+                    <select id="edit-project-category-select">
+                        <!-- Opsi akan diisi oleh JavaScript -->
+                        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+                    </select>
+                    <input type="text" id="edit-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
+                    <!-- =============================================================== -->
                     <p>Gambar Saat Ini:</p>
                     <img id="current-project-image" src="" alt="Gambar Proyek" style="max-width: 100px; margin-bottom: 10px;">
                     <label for="edit-project-image">Ganti Gambar (Opsional):</label>
@@ -87,14 +93,27 @@
             <button id="logout-btn" style="background: #555; float: right;">LOGOUT</button>
             <form id="add-project-form">
         <input type="text" id="project-title" placeholder="Judul Proyek..." required>
-        <!-- BARIS BARU DI SINI -->
-        <input type="text" id="project-category" placeholder="Kategori (misal: Yamaha, Honda, Forged)" required>
+        <!-- ================== BLOK KATEGORI BARU (TAMBAH) ================== -->
+        <label for="add-project-category-select">Pilih Kategori:</label>
+        <select id="add-project-category-select">
+            <!-- Opsi akan diisi oleh JavaScript -->
+            <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+        </select>
+        <input type="text" id="add-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
+        <!-- ================================================================ -->
+        
         <input type="file" id="project-image" required>
         <button type="submit">TAMBAH_PROYEK</button>
         </form>
             <div id="project-list"></div>   
             <hr style="margin: 20px 0; border-color: #333;">
             <h3>[EXISTING_PROJECTS]</h3>
+            <!-- ================== KODE BARU DIMULAI DI SINI ================== -->
+            <div id="admin-filter-buttons" class="filter-container">
+                <!-- Tombol filter admin akan dibuat oleh JavaScript -->
+            </div>
+            <!-- ================== KODE BARU BERAKHIR DI SINI ================== -->
+
             <div id="project-list"></div>
         </div>
     </div>
