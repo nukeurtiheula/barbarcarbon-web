@@ -25,24 +25,18 @@ const editNewCategoryInput = document.getElementById('edit-new-category-input');
 let allAdminProjects = [];
 
 // --- FUNGSI HELPER UNTUK DROPDOWN PINTAR ---
-
-// Fungsi untuk mengisi dropdown kategori
 function populateCategoryDropdowns(currentCategory = null) {
-    // Ambil semua nama kategori yang unik dari data kita, dan saring yang kosong
-    const categories = [...new Set(allAdminProjects.map(p => p.category).filter(Boolean))];
-    
+const categories = [...new Set(allAdminProjects.map(p => p.category).filter(Boolean))];
     const dropdowns = [addCategorySelect, editCategorySelect];
     dropdowns.forEach(dropdown => {
-        // Reset isi dropdown, sisakan opsi "Buat Baru"
-        dropdown.innerHTML = '<option value="---buat-baru---">--- Buat Kategori Baru ---</option>';
-        // Isi dengan kategori yang sudah ada
+        if (!dropdown) return;
+    dropdown.innerHTML = '<option value="---buat-baru---">--- Buat Kategori Baru ---</option>';
         categories.forEach(cat => {
             dropdown.innerHTML += `<option value="${cat}">${cat}</option>`;
         });
     });
 
-    // Kalau kita lagi ngedit, otomatis pilih kategori yang sesuai di dropdown edit
-    if (currentCategory && editCategorySelect) {
+if (currentCategory && editCategorySelect) {
         editCategorySelect.value = currentCategory;
     }
 }

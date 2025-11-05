@@ -49,6 +49,23 @@
             #project-list .item button {
                 flex-grow: 1; /* Bikin kedua tombol (EDIT/HAPUS) lebarnya sama */
             }
+            
+            .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            }
+            .form-group span {
+                flex-shrink: 0; /* Mencegah teks 'Pilih Kategori' jadi kecil */
+            }
+            .form-group select {
+            width: 100%; /* Bikin dropdown mengisi sisa ruang */
+            padding: 10px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+        }
 
         }
     </style>
@@ -70,7 +87,13 @@
                     <label for="edit-project-title">Judul Proyek:</label>
                     <input type="text" id="edit-project-title" required>
                     <!-- ================== BLOK KATEGORI BARU (EDIT) ================== -->
-                    <label for="edit-project-category-select">Pilih Kategori:</label>
+                    <div class="form-group">
+                    <span>Pilih Kategori:</span>
+                    <select id="edit-project-category-select">
+                        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+                    </select>
+                    </div>
+                    <input type="text" id="edit-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
                     <select id="edit-project-category-select">
                         <!-- Opsi akan diisi oleh JavaScript -->
                         <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
@@ -94,7 +117,13 @@
             <form id="add-project-form">
         <input type="text" id="project-title" placeholder="Judul Proyek..." required>
         <!-- ================== BLOK KATEGORI BARU (TAMBAH) ================== -->
-        <label for="add-project-category-select">Pilih Kategori:</label>
+        <div class="form-group">
+    <span>Pilih Kategori:</span>
+    <select id="add-project-category-select">
+        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+    </select>
+    </div>
+    <input type="text" id="add-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
         <select id="add-project-category-select">
             <!-- Opsi akan diisi oleh JavaScript -->
             <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
