@@ -57,21 +57,40 @@ const displayProjects = async () => {
         projectList.appendChild(projectEl);
     });
 };
+// (CREATE) Tambah Proyek Baru
 addProjectForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const title = document.getElementById('project-title').value;
     const category = document.getElementById('project-category').value;
     const imageFile = document.getElementById('project-image').files[0];
-    if (!title || !imageFile) return alert("Judul dan gambar tidak boleh kosong!");
+
+    if (!title || !category || !imageFile) {
+        alert("Judul, Kategori, dan Gambar tidak boleh kosong!");
+        return;
+    }
+
     try {
+        // Step 1: Upload gambar (sama seperti sebelumnya)
         const fileName = `${Date.now()}-${imageFile.name}`;
         await supabaseClient.storage.from('project-images').upload(fileName, imageFile);
+
+        // Step 2: Dapatkan URL-nya (INI BAGIAN YANG LUPA DITAMBAHKAN)
         const { data: urlData } = supabaseClient.storage.from('project-images').getPublicUrl(fileName);
-        const { error } = await supabaseClient.from('projects').insert([{ title: title, category: category, image_url: imageUrl }]);
-        if (error) throw error;
+        const imageUrl = urlData.publicUrl; // <-- Sekarang variabel imageUrl sudah dibuat
+
+        // Step 3: Insert data ke tabel, sekarang variabelnya sudah ada
+        const { error: insertError } = await supabaseClient
+            .from('projects')
+            .insert([{ title: title, category: category, image_url: imageUrl }]); // <-- image_url, bukan imageUrl
+        
+        if (insertError) {
+            throw insertError;
+        }
+
         addProjectForm.reset();
         alert('Proyek berhasil ditambahkan!');
-        displayProjects();
+        displayProjects(); // Refresh list
+
     } catch (error) {
         alert(error.message);
     }
