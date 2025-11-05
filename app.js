@@ -26,14 +26,27 @@ const loadProjects = async () => {
 
     galleryGrid.innerHTML = ''; // Kosongkan galeri
     projects.forEach(project => {
-        const item = document.createElement('div');
-        item.classList.add('gallery-item');
-        item.style.backgroundImage = `url('${project.image_url}')`;
-        item.innerHTML = `
-            <div class="overlay"><h3>${project.title}</h3></div>
-        `;
-        galleryGrid.appendChild(item);
-    });
+    // Buat div pembungkusnya (bingkainya)
+    const item = document.createElement('div');
+    item.classList.add('gallery-item');
+
+    // Buat elemen gambar <img>
+    const img = document.createElement('img');
+    img.src = project.image_url; // Set sumber gambarnya
+    img.alt = project.title;     // Teks alternatif, bagus untuk SEO
+
+    // Buat overlay untuk judul
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    overlay.innerHTML = `<h3>${project.title}</h3>`;
+
+    // Masukkan gambar dan overlay ke dalam bingkai
+    item.appendChild(img);
+    item.appendChild(overlay);
+    
+    // Masukkan bingkai ke dalam galeri
+    galleryGrid.appendChild(item);
+});
 };
 
 // Panggil fungsi untuk memuat proyek saat halaman dibuka

@@ -189,13 +189,23 @@ h1:after {
 
 /* ================== INI BAGIAN PALING PENTING ================== */
 .gallery-item {
-    height: 400px; /* <--- PASTIKAN BARIS INI ADA */
-    background-size: cover;
-    background-position: center;
+    height: 400px;
     position: relative;
     overflow: hidden;
-    filter: grayscale(100%) contrast(1.2);
-    transition: all 0.4s ease;
+    /* HAPUS SEMUA properti background-* dari sini */
+    
+    /* TAMBAHKAN INI (opsional, untuk warna jika ada ruang sisa) */
+    background-color: #111; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TAMBAHKAN BLOK BARU INI */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* <-- INI DIA KUNCI AJAIBNYA */
 }
 /* =============================================================== */
 
