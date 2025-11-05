@@ -18,67 +18,40 @@
         .modal-content h2 { margin-top: 0; }
         .modal-actions { margin-top: 20px; display: flex; gap: 10px; }
         .modal-actions #cancel-edit-btn { background: #555; }
-        /* ======================================================= */
-        /* === KODE BARU UNTUK TAMPILAN MOBILE DIMULAI DI SINI === */
-        /* ======================================================= */
+        
+        /* CSS untuk Dropdown Kategori (DI LUAR MEDIA QUERY) */
+        .form-group { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .form-group span { flex-shrink: 0; font-family: var(--font-mono); color: var(--text-secondary); }
+        .form-group select { width: 100%; padding: 10px; background: #333; border: 1px solid #555; color: #fff; font-family: var(--font-mono); }
 
-        /* Aturan ini akan aktif jika lebar layar 768px atau lebih kecil */
+        /* CSS untuk Filter */
+        .filter-container { margin-bottom: 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+        .filter-btn { background: transparent; border: 2px solid var(--border-color); color: var(--text-secondary); padding: 8px 20px; cursor: pointer; font-family: var(--font-mono); font-weight: 700; transition: all 0.3s ease; }
+        .filter-btn:hover { border-color: var(--brutal-red); color: var(--text-light); }
+        .filter-btn.active { background: var(--brutal-red); border-color: var(--brutal-red); color: #000; }
+
+        /* Aturan untuk Tampilan Mobile */
         @media (max-width: 768px) {
-            
-            /* Bikin kontainer utama jadi full-width */
-            .admin-container {
-                margin: 10px; /* Kasih sedikit jarak dari pinggir */
-                padding: 15px;
-                width: auto; /* Hapus batasan lebar */
-            }
-
-            /* Bikin daftar proyek jadi atas-bawah */
-            #project-list .item {
-                flex-direction: column; /* Susun jadi vertikal */
-                align-items: flex-start; /* Rata kiri semua */
-                gap: 15px; /* Kasih jarak antara judul dan grup tombol */
-            }
-
-            /* Atur grup tombol biar rapi */
-            #project-list .item div {
-                width: 100%; /* Bikin grup tombol jadi full-width */
-                display: flex;
-                gap: 10px;
-            }
-
-            #project-list .item button {
-                flex-grow: 1; /* Bikin kedua tombol (EDIT/HAPUS) lebarnya sama */
-            }
-            
-            .form-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            }
-            .form-group span {
-                flex-shrink: 0; /* Mencegah teks 'Pilih Kategori' jadi kecil */
-            }
-            .form-group select {
-            width: 100%; /* Bikin dropdown mengisi sisa ruang */
-            padding: 10px;
-            background: #333;
-            border: 1px solid #555;
-            color: #fff;
-        }
-
+            .admin-container { margin: 10px; padding: 15px; width: auto; }
+            #project-list .item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            #project-list .item div { width: 100%; display: flex; gap: 10px; }
+            #project-list .item button { flex-grow: 1; }
         }
     </style>
 </head>
 <body>
     <div class="admin-container">
         <h1 style="font-family: var(--font-heading); color: var(--brutal-red); text-align:center;">ADMIN_ACCESS</h1>
+
+        <!-- FORM LOGIN -->
         <div id="login-form">
             <h2>[AUTHENTICATION_REQUIRED]</h2>
             <input type="email" id="email" placeholder="email_admin@domain.com">
             <input type="password" id="password" placeholder="password">
             <button id="login-btn">LOGIN</button>
         </div>
+
+        <!-- MODAL EDIT -->
         <div id="edit-modal" class="modal-overlay" style="display: none;">
             <div class="modal-content">
                 <h2>[EDIT_PROJECT]</h2>
@@ -86,20 +59,15 @@
                     <input type="hidden" id="edit-project-id">
                     <label for="edit-project-title">Judul Proyek:</label>
                     <input type="text" id="edit-project-title" required>
-                    <!-- ================== BLOK KATEGORI BARU (EDIT) ================== -->
+                    
                     <div class="form-group">
-                    <span>Pilih Kategori:</span>
-                    <select id="edit-project-category-select">
-                        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
-                    </select>
+                        <span>Pilih Kategori:</span>
+                        <select id="edit-project-category-select">
+                            <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+                        </select>
                     </div>
                     <input type="text" id="edit-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
-                    <select id="edit-project-category-select">
-                        <!-- Opsi akan diisi oleh JavaScript -->
-                        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
-                    </select>
-                    <input type="text" id="edit-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
-                    <!-- =============================================================== -->
+
                     <p>Gambar Saat Ini:</p>
                     <img id="current-project-image" src="" alt="Gambar Proyek" style="max-width: 100px; margin-bottom: 10px;">
                     <label for="edit-project-image">Ganti Gambar (Opsional):</label>
@@ -111,41 +79,36 @@
                 </form>
             </div>
         </div>
+
+        <!-- PANEL ADMIN UTAMA -->
         <div id="admin-panel">
             <h2>[MANAGE_PROJECTS]</h2>
             <button id="logout-btn" style="background: #555; float: right;">LOGOUT</button>
             <form id="add-project-form">
-        <input type="text" id="project-title" placeholder="Judul Proyek..." required>
-        <!-- ================== BLOK KATEGORI BARU (TAMBAH) ================== -->
-        <div class="form-group">
-    <span>Pilih Kategori:</span>
-    <select id="add-project-category-select">
-        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
-    </select>
-    </div>
-    <input type="text" id="add-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
-        <select id="add-project-category-select">
-            <!-- Opsi akan diisi oleh JavaScript -->
-            <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
-        </select>
-        <input type="text" id="add-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
-        <!-- ================================================================ -->
-        
-        <input type="file" id="project-image" required>
-        <button type="submit">TAMBAH_PROYEK</button>
-        </form>
-            <div id="project-list"></div>   
+                <input type="text" id="project-title" placeholder="Judul Proyek..." required>
+                
+                <div class="form-group">
+                    <span>Pilih Kategori:</span>
+                    <select id="add-project-category-select">
+                        <option value="---buat-baru---">--- Buat Kategori Baru ---</option>
+                    </select>
+                </div>
+                <input type="text" id="add-new-category-input" placeholder="Ketik Nama Kategori Baru..." style="display: none; margin-top: 10px;">
+                
+                <input type="file" id="project-image" required>
+                <button type="submit">TAMBAH_PROYEK</button>
+            </form>
             <hr style="margin: 20px 0; border-color: #333;">
             <h3>[EXISTING_PROJECTS]</h3>
-            <!-- ================== KODE BARU DIMULAI DI SINI ================== -->
+            
             <div id="admin-filter-buttons" class="filter-container">
-                <!-- Tombol filter admin akan dibuat oleh JavaScript -->
+                <!-- Tombol filter akan dibuat oleh JavaScript -->
             </div>
-            <!-- ================== KODE BARU BERAKHIR DI SINI ================== -->
-
             <div id="project-list"></div>
         </div>
     </div>
+
+    <!-- Panggil script Supabase dan admin.js -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/admin/admin.js"></script>
 </body>
