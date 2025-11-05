@@ -152,7 +152,12 @@ addProjectForm.addEventListener('submit', async (e) => {
     // Logika baru untuk mengambil kategori dari dropdown atau input baru
     let category = addCategorySelect.value;
     if (category === '---buat-baru---') {
-        category = addNewCategoryInput.value;
+        const newCategoryValue = addNewCategoryInput.value.trim();
+        if (!newCategoryValue) {
+            addNewCategoryInput.style.display = 'block'; // PAKSA TAMPILKAN
+            return alert("Kamu memilih 'Buat Kategori Baru', silakan ketik nama kategorinya.");
+        }
+        category = newCategoryValue;
     }
 
     if (!title || !category || !imageFile) {
