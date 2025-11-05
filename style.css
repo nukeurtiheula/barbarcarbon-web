@@ -1,0 +1,351 @@
+/* --- GLOBAL & VARIABLES --- */
+:root {
+    --brutal-red: #FF0000;
+    --dark-bg: #000000;
+    --card-bg: #111111;
+    --text-light: #FFFFFF;
+    --text-secondary: #AAAAAA;
+    --font-heading: 'Anton', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-mono);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+    background-image: url('https://www.transparenttextures.com/patterns/brushed-metal.png');
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+.logo span { /* Glitch effect on 'A' */
+    color: var(--brutal-red);
+    text-shadow: 0 0 5px var(--brutal-red);
+    animation: glitch-char 3s infinite;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+nav a:hover {
+    color: var(--text-light);
+    text-shadow: 0 0 5px var(--brutal-red);
+}
+.cta-nav {
+    background-color: var(--brutal-red);
+    color: var(--text-light);
+    padding: 5px 10px;
+    border: 1px solid var(--brutal-red);
+}
+.cta-nav:hover {
+    background: transparent;
+    color: var(--brutal-red);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.5;
+}
+.video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero::after { /* Overlay */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 30%, #000 100%);
+    z-index: -1;
+}
+.hero-content {
+    text-align: center;
+    z-index: 1;
+}
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 7vw;
+    letter-spacing: 5px;
+    position: relative;
+    color: var(--text-light);
+    animation: glitch 1.5s infinite;
+}
+.hero p {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+.cta-hero {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--brutal-red);
+    color: var(--brutal-red);
+    padding: 10px 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.cta-hero:hover {
+    background: var(--brutal-red);
+    color: var(--text-light);
+    box-shadow: 0 0 20px var(--brutal-red);
+}
+
+/* --- GLITCH ANIMATION --- */
+@keyframes glitch {
+    2%, 64% { transform: translate(2px, 0) skew(0deg); }
+    4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+    62% { transform: translate(0, 0) skew(5deg); }
+}
+h1:before, h1:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+h1:before {
+    left: 2px;
+    text-shadow: -2px 0 var(--brutal-red);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+h1:after {
+    left: -2px;
+    text-shadow: -2px 0 #00fff9, 2px 2px var(--brutal-red);
+    clip: rect(85px, 450px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim { 0% { clip: rect(42px, 9999px, 44px, 0); } /* ... (rest of keyframes) */ }
+@keyframes glitch-anim-2 { 0% { clip: rect(20px, 9999px, 90px, 0); } /* ... (rest of keyframes) */ }
+@keyframes glitch-char { 0%, 5%, 100% { opacity: 1; } 2.5%, 7.5% { opacity: 0.3; } }
+
+
+/* --- GALLERY SECTION --- */
+.gallery-section {
+    padding: 100px 5%;
+    text-align: center;
+}
+.gallery-section h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 50px;
+}
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 50px;
+}
+
+/* ================== INI BAGIAN PALING PENTING ================== */
+.gallery-item {
+    height: 400px; /* <--- PASTIKAN BARIS INI ADA */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    filter: grayscale(100%) contrast(1.2);
+    transition: all 0.4s ease;
+}
+/* =============================================================== */
+
+.gallery-item:hover {
+    filter: grayscale(0%) contrast(1);
+}
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, #000 20%, transparent);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+.gallery-item:hover .overlay {
+    transform: translateY(0);
+}
+.overlay h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--brutal-red);
+    text-shadow: 0 0 10px #000;
+}
+
+
+/* --- SERVICES SECTION --- */
+.services-section {
+    padding: 100px 10%;
+    background-color: var(--card-bg);
+}
+.services-section h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-bottom: 1px solid #333;
+}
+.service-title h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-light);
+    width: 300px; /* Lebar tetap untuk judul */
+    transition: color 0.3s ease;
+}
+.service-item:hover .service-title h3 {
+    color: var(--brutal-red);
+}
+.service-desc {
+    flex: 1;
+    padding-left: 30px;
+    color: var(--text-secondary);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 80px 5% 0;
+}
+.footer-content h2 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--brutal-red);
+}
+.cta-footer {
+    display: inline-block;
+    background-color: var(--brutal-red);
+    color: var(--text-light);
+    padding: 15px 40px;
+    margin: 30px 0;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    border: 2px solid var(--brutal-red);
+    transition: all 0.3s ease;
+}
+.cta-footer:hover {
+    background: transparent;
+    color: var(--brutal-red);
+}
+.footer-bottom {
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid #333;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .hero h1 { font-size: 12vw; }
+    .gallery-item { height: 300px; }
+    .service-item { flex-direction: column; }
+    .service-title h3 { width: auto; margin-bottom: 10px; }
+    .service-desc { padding-left: 0; }
+}
+
+/* --- RESPONSIVE DESIGN (SENSOR BUNGLON) --- */
+/* Aturan ini akan aktif jika lebar layar 768px atau lebih kecil */
+
+@media (max-width: 768px) {
+
+    /* 1. Kecilin ukuran semua judul */
+    .hero h1 {
+        font-size: 12vw; /* Ukuran font ngikutin lebar layar */
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+    /* 2. Sederhanain Header */
+    nav {
+        flex-direction: column; /* Susun logo dan menu jadi atas-bawah */
+        gap: 15px;
+    }
+
+    /* 3. Bikin Section Jasa jadi atas-bawah */
+    .service-item {
+        flex-direction: column; /* Ubah dari sampingan jadi atas-bawah */
+        text-align: center;
+        gap: 10px;
+    }
+
+    .service-title h3 {
+        width: auto; /* Hapus lebar tetap biar full */
+    }
+
+    .service-desc {
+        padding-left: 0; /* Hapus padding kiri */
+    }
+
+    /* 4. Atur ulang galeri biar lebih pas */
+    .gallery-grid {
+        /* Cukup 1 kolom di layar HP */
+        grid-template-columns: 1fr; 
+    }
+
+    .gallery-item {
+        height: 300px; /* Bikin item galeri sedikit lebih pendek */
+    }
+    
+}
